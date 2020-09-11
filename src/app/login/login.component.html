@@ -1,0 +1,47 @@
+<section>
+  <form
+    fxLayout="column"
+    fxLayoutAlign="center center"
+    fxLayoutGap="11px"
+    [formGroup]="loginForm"
+    (ngSubmit)="onSubmit()"
+  >
+    <h3>User Login</h3>
+    <mat-form-field>
+      <input
+        matInput
+        type="email"
+        name="email"
+        placeholder="your email"
+        formControlName="email"
+      />
+      <mat-error *ngIf="loginForm.get('email').hasError('required')"
+        >E-Mail should not be empty</mat-error
+      >
+      <mat-error *ngIf="!loginForm.get('email').hasError('required')"
+        >E-Mail is inValid</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        type="password"
+        name="password"
+        placeholder="your password"
+        formControlName="password"
+      />
+      <mat-error *ngIf="loginForm.get('password').hasError('required')"
+        >Password should not be empty</mat-error
+      >
+    </mat-form-field>
+    <button
+      type="submit"
+      color="primary"
+      mat-raised-button
+      [routerLink]="['/user']"
+      [disabled]="!loginForm.valid"
+    >
+      Submit
+    </button>
+  </form>
+</section>

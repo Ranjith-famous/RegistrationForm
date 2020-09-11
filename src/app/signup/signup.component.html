@@ -1,0 +1,111 @@
+<section>
+  <form
+    fxLayout="column"
+    fxLayoutAlign="center center"
+    fxLayoutGap="10px"
+    #f="ngForm"
+    (ngSubmit)="onSubmit(f)"
+  >
+    <h3>User Registration Form</h3>
+    <mat-form-field>
+      <input
+        matInput
+        type="text"
+        placeholder="FirstName"
+        ngModel
+        name="fName"
+        required
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        type="text"
+        placeholder="LastName"
+        ngModel
+        name="lName"
+        required
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        type="email"
+        matInput
+        placeholder="Your Email"
+        ngModel
+        name="email"
+        required
+        email
+        #emailInput="ngModel"
+      />
+      <mat-error *ngIf="emailInput.hasError('required')"
+        >E-Mail should not be empty</mat-error
+      >
+      <mat-error *ngIf="!emailInput.hasError('required')"
+        >E-Mail is inValid</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        type="number"
+        placeholder="PhoneNumber"
+        ngModel
+        name="Mobile"
+        pattern="^((\\+91-?)|0)?[0-9]{10}$"
+        required
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Textarea</mat-label>
+      <textarea matInput ngModel required name="address"></textarea>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        type="password"
+        placeholder="Your Password"
+        ngModel
+        name="password"
+        minlength="8"
+        required
+        #pwdInput="ngModel"
+      />
+      <mat-hint align="end">{{ pwdInput.value?.length }} / 8</mat-hint>
+      <mat-error>Should be > 8</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        type="password"
+        placeholder="Confirm Password"
+        ngModel
+        name="confirmPassword"
+        required
+        #confirmPassword="ngModel"
+      />
+      <mat-error *ngIf="f.value.password !== f.value.confirmPassword"
+        >Passwords must match</mat-error
+      >
+    </mat-form-field>
+
+    <div>
+      <mat-label>Gender: </mat-label>
+      <mat-radio-group ngModel required name="address">
+        <mat-radio-button value="male">Male</mat-radio-button>
+        <mat-radio-button value="female">Female</mat-radio-button>
+        <mat-radio-button value="other">Other</mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <button
+      type="submit"
+      mat-raised-button
+      color="primary"
+      [disabled]="f.invalid"
+    >
+      Register
+    </button>
+    <a [routerLink]="['/login']" class="btn btn-link">Login</a>
+  </form>
+</section>
